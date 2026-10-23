@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#152926">
+  <meta name="description" content="A practical 90-day strength, nutrition, habit, and progress tracker.">
+  <title>90D Fit | Your Transformation Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#dashboard" aria-label="90D Fit dashboard" data-nav="dashboard">
+        <span class="brand-mark">90<span>D</span></span>
+        <span class="brand-copy"><strong>FIT JOURNAL</strong><small>THE 90-DAY PROJECT</small></span>
+      </a>
+
+      <div class="side-label">YOUR WORKSPACE</div>
+      <nav class="nav-list" aria-label="Main navigation">
+        <button class="nav-link active" type="button" data-nav="dashboard"><span class="nav-icon">▦</span> Dashboard</button>
+        <button class="nav-link" type="button" data-nav="workouts"><span class="nav-icon">↗</span> Training plan</button>
+        <button class="nav-link" type="button" data-nav="nutrition"><span class="nav-icon">◒</span> Nutrition</button>
+        <button class="nav-link" type="button" data-nav="progress"><span class="nav-icon">⌁</span> Progress log</button>
+        <button class="nav-link" type="button" data-nav="habits"><span class="nav-icon">✓</span> Daily habits</button>
+        <button class="nav-link" type="button" data-nav="settings"><span class="nav-icon">⚙</span> My settings</button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="side-progress-head"><span>90-day mission</span><strong id="sideProgressLabel">Day 1 / 90</strong></div>
+        <div class="progress-track"><span id="sideProgressBar" style="width:1%"></span></div>
+        <p>Small promises. Kept daily.</p>
+        <div class="privacy-note"><span class="privacy-dot"></span> Your data stays in this browser</div>
+      </div>
+    </aside>
+    <button class="mobile-nav-backdrop" id="mobileNavBackdrop" type="button" aria-label="Close navigation" hidden tabindex="-1"></button>
+
+    <div class="main-column">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="mobile-menu" id="mobileMenu" type="button" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">☰</button>
+          <div><div class="eyebrow" id="pageEyebrow">YOUR OVERVIEW</div><h1 id="pageTitle">Dashboard</h1></div>
+        </div>
+        <div class="topbar-actions">
+          <div class="date-chip"><span class="date-dot"></span><span id="todayDate">Today</span></div>
+          <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark theme" aria-pressed="false" title="Switch to dark theme"><span aria-hidden="true">◐</span><span class="theme-toggle-label">Dark mode</span></button>
+          <button class="button button-dark button-small" type="button" data-nav="habits">Log today <span aria-hidden="true">↗</span></button>
+        </div>
+      </header>
+
+      <main class="page-content">
+        <!-- DASHBOARD -->
+        <section class="view active" id="view-dashboard" aria-labelledby="pageTitle">
+          <div class="hero-panel">
+            <div class="hero-copy">
+              <div class="hero-kicker"><span class="kicker-dot"></span><span id="heroPhaseLabel">PHASE 01 · FOUNDATION</span></div>
+              <h2>Build strength.<br><em>Keep promises.</em></h2>
+              <p>A practical plan for a stronger body. No crash diets, no ego lifting, no guesswork.</p>
+              <div class="hero-actions">
+                <button class="button button-lime" type="button" data-action="open-todays-workout">View today’s plan <span aria-hidden="true">↗</span></button>
+                <button class="button button-outline-light" type="button" data-nav="progress">Review progress</button>
+              </div>
+              <div class="hero-footnote"><span>✦</span> Consistency beats intensity you cannot recover from.</div>
+            </div>
+            <div class="hero-visual" aria-label="90 day progress">
+              <div class="progress-ring" id="heroRing" style="--ring-progress:1%">
+                <div class="ring-inner"><span class="ring-label">DAY</span><strong id="heroDay">01</strong><span class="ring-total">OF 90</span></div>
+              </div>
+              <div class="ring-caption"><strong id="heroDaysLeft">89 days to go</strong><span id="heroStartCaption">Your first day starts now.</span></div>
+              <div class="hero-orbit orbit-one"></div><div class="hero-orbit orbit-two"></div>
+            </div>
+            <div class="hero-decoration hero-decoration-one"></div><div class="hero-decoration hero-decoration-two"></div>
+          </div>
+
+          <div class="section-heading"><div><div class="eyebrow">THE IMPORTANT NUMBERS</div><h2>Your snapshot</h2></div><span class="quiet-pill"><span class="status-dot"></span> Beginner plan</span></div>
+          <div class="stat-grid">
+            <article class="stat-card"><div class="stat-top"><span class="stat-icon weight-icon">↕</span><span class="stat-caption">LATEST WEIGHT</span></div><div class="stat-value"><strong id="statWeight">68.5</strong><span>kg</span></div><div class="stat-foot" id="statWeightFoot">Starting point recorded</div></article>
+            <article class="stat-card"><div class="stat-top"><span class="stat-icon protein-icon">◌</span><span class="stat-caption">DAILY PROTEIN TARGET</span></div><div class="stat-value"><strong id="statProtein">115</strong><span>g</span></div><div class="stat-foot">Food first. Powder optional.</div></article>
+            <article class="stat-card"><div class="stat-top"><span class="stat-icon session-icon">↗</span><span class="stat-caption">SESSIONS LOGGED</span></div><div class="stat-value"><strong id="statSessions">0</strong><span>sessions</span></div><div class="stat-foot" id="statSessionsFoot">Your log starts here</div></article>
+            <article class="stat-card"><div class="stat-top"><span class="stat-icon calorie-icon">◍</span><span class="stat-caption">STARTING CALORIE ESTIMATE</span></div><div class="stat-value"><strong id="statCalories">2,400</strong><span>kcal</span></div><div class="stat-foot">Review after 14 days</div></article>
+          </div>
+
+          <div class="dashboard-grid">
+            <article class="panel today-panel">
+              <div class="panel-heading"><div><div class="eyebrow">YOUR NEXT MOVE</div><h3>Today's plan</h3></div><span class="mini-date" id="todayDayLabel">DAY 1</span></div>
+              <div class="today-body"><div class="today-symbol" id="todaySymbol">A</div><div class="today-info"><h4 id="todayWorkoutTitle">Full Body A</h4><p id="todayWorkoutDescription">Learn the movement patterns with controlled weights.</p><div class="inline-meta"><span>◷ <span id="todayDuration">45–60 min</span></span><span>◎ <span id="todayFocus">Full body</span></span></div></div></div>
+              <div class="today-exercises" id="todayExercisePreview"></div>
+              <div class="panel-bottom"><span class="muted-text" id="todayInstruction">Leave 3–4 good reps in reserve.</span><button class="button button-dark" type="button" data-action="open-todays-workout">Log workout <span aria-hidden="true">↗</span></button></div>
+            </article>
+
+            <article class="panel habits-panel">
+              <div class="panel-heading"><div><div class="eyebrow">DO THE BASICS WELL</div><h3>Daily check-in</h3></div><span class="check-count" id="habitCount">0 / 5</span></div>
+              <div class="habit-progress-track"><span id="habitProgressBar" style="width:0%"></span></div>
+              <div class="dashboard-habit-list" id="dashboardHabitList">
+                <label class="habit-row"><input type="checkbox" data-habit-check="train"><span class="custom-check"></span><span class="habit-label">Training or planned recovery</span></label>
+                <label class="habit-row"><input type="checkbox" data-habit-check="protein"><span class="custom-check"></span><span class="habit-label">Protein with meals</span></label>
+                <label class="habit-row"><input type="checkbox" data-habit-check="water"><span class="custom-check"></span><span class="habit-label">Water throughout the day</span></label>
+                <label class="habit-row"><input type="checkbox" data-habit-check="sleep"><span class="custom-check"></span><span class="habit-label">Protect bedtime</span></label>
+                <label class="habit-row"><input type="checkbox" data-habit-check="learn"><span class="custom-check"></span><span class="habit-label">Learn one useful thing</span></label>
+              </div>
+              <div class="panel-bottom"><span class="muted-text">Aim for repeatable, not perfect.</span><button class="text-button" type="button" data-nav="habits">Full check-in ↗</button></div>
+            </article>
+          </div>
+
+          <div class="section-heading roadmap-heading"><div><div class="eyebrow">THE 90-DAY ROADMAP</div><h2>One phase at a time</h2></div><button class="text-button" type="button" data-nav="workouts">Explore training plan ↗</button></div>
+          <div class="phase-grid">
+            <article class="phase-card phase-current" id="phaseCard1"><div class="phase-number">01</div><div class="phase-days">DAYS 1–30</div><h3>Foundation</h3><p>Learn technique, create consistency, and build coordination.</p><div class="phase-tag">START HERE</div></article>
+            <article class="phase-card" id="phaseCard2"><div class="phase-number">02</div><div class="phase-days">DAYS 31–60</div><h3>Build strength</h3><p>Progress reps and loads while monitoring recovery.</p><div class="phase-tag">NEXT PHASE</div></article>
+            <article class="phase-card" id="phaseCard3"><div class="phase-number">03</div><div class="phase-days">DAYS 61–90</div><h3>Refine</h3><p>Improve balance, review trends, and plan beyond day 90.</p><div class="phase-tag">LATER</div></article>
+          </div>
+
+          <div class="notice-banner"><div class="notice-icon">i</div><div><strong>A note about your chest concern</strong><p>Training can build your pectoral muscles, but it cannot reliably remove glandular gynecomastia. Arrange a routine medical assessment to clarify what is causing the enlargement. This tracker is not a medical diagnostic tool.</p></div><button class="text-button" type="button" data-action="show-health-note" aria-label="Read health note">Read note ↗</button></div>
+        </section>
+
+        <!-- WORKOUTS -->
+        <section class="view" id="view-workouts" aria-labelledby="pageTitle" hidden>
+          <div class="page-intro"><div><div class="eyebrow">TRAIN WITH A PLAN</div><h2>Training library</h2><p>Start with three manageable full-body sessions each week. Add a fourth day only when your recovery supports it.</p></div><div class="intro-badge"><span>↗</span><div><strong id="workoutPhaseTitle">Phase 1</strong><small id="workoutPhaseSub">Foundation · Days 1–30</small></div></div></div>
+          <div class="training-guidance"><div class="guidance-icon">✦</div><div><strong>How hard should a set feel?</strong><p>Finish most sets with about 3–4 good repetitions still possible in your first weeks. Use the smallest weight increase after you reach the top of the rep range with stable technique.</p></div></div>
+          <div class="subsection-heading"><h3>Foundation workouts</h3><span class="muted-text">Days 1–30 · full body</span></div>
+          <div class="workout-grid" id="foundationWorkoutGrid"></div>
+          <div class="subsection-heading later-heading"><h3>Build and refine workouts</h3><span class="muted-text">Days 31–90 · upper / lower</span></div>
+          <div class="workout-grid" id="upperLowerWorkoutGrid"></div>
+          <div class="workout-tools-grid">
+            <article class="panel records-panel"><div class="panel-heading"><div><div class="eyebrow">FROM YOUR LOGS</div><h3>Personal records</h3></div><span class="stat-icon weight-icon" aria-hidden="true">↗</span></div><div id="personalRecords" class="record-list"><p class="empty-state">Log numeric reps and loads to build records from your sessions.</p></div></article>
+            <article class="panel strength-panel"><div class="panel-heading"><div><div class="eyebrow">RECORDED LOADS ONLY</div><h3>Weekly strength progression</h3></div><span class="stat-icon protein-icon" aria-hidden="true">↗</span></div>
+              <label for="strengthExerciseSelect">Exercise</label><select id="strengthExerciseSelect" aria-label="Choose an exercise for weekly strength progression"></select>
+              <div id="strengthProgressChart" class="strength-progress-chart" aria-live="polite"><p class="empty-state">Log a numeric load for an exercise to see weekly progression.</p></div>
+            </article>
+          </div>
+          <article class="panel calendar-panel">
+            <div class="panel-heading calendar-heading"><div><div class="eyebrow">TRAINING SCHEDULE</div><h3>Workout calendar</h3><p class="muted-text">Completed sessions come from your workout log. Planned sessions are the dates you add here.</p></div>
+              <div class="calendar-controls"><button class="calendar-step" type="button" data-action="calendar-prev" aria-label="Previous month">←</button><button class="text-button calendar-today" type="button" data-action="calendar-today">Today</button><button class="calendar-step" type="button" data-action="calendar-next" aria-label="Next month">→</button></div>
+            </div>
+            <div class="calendar-month-title" id="calendarMonth" aria-live="polite"></div>
+            <div class="calendar-grid" id="calendarGrid" role="grid" aria-label="Workout calendar"></div>
+            <form id="plannedSessionForm" class="planned-session-form">
+              <label>Date<input id="plannedSessionDate" name="date" type="date" required></label>
+              <label>Workout<select id="plannedWorkoutSelect" name="workoutId" required></select></label>
+              <button class="button button-dark" type="submit">Add planned session</button>
+            </form>
+          </article>
+          <article class="panel custom-workout-panel">
+            <div class="panel-heading"><div><div class="eyebrow">MAKE IT YOURS</div><h3>Custom workout templates</h3><p class="muted-text">Create a reusable list. Each exercise starts at 3 sets of 8–12 reps; adjust load and reps when logging.</p></div></div>
+            <form id="customWorkoutForm" class="custom-workout-form">
+              <label>Template name<input name="name" type="text" maxlength="50" placeholder="e.g. Home strength" required></label>
+              <label>Exercises, one per line<textarea name="exercises" rows="3" maxlength="1200" placeholder="Push-up&#10;Dumbbell row&#10;Split squat" required></textarea></label>
+              <button class="button button-dark" type="submit">Save template</button>
+            </form>
+            <div id="customWorkoutGrid" class="custom-workout-list"><p class="empty-state">Your custom templates will appear here.</p></div>
+          </article>
+          <div class="safety-footer"><strong>Technique beats load.</strong> Ask a qualified trainer to show you unfamiliar equipment. Stop any exercise that causes sharp or joint pain, dizziness, or unusual symptoms.</div>
+        </section>
+
+        <!-- NUTRITION -->
+        <section class="view" id="view-nutrition" aria-labelledby="pageTitle" hidden>
+          <div class="page-intro"><div><div class="eyebrow">FOOD THAT FITS REAL LIFE</div><h2>Nutrition, simplified</h2><p>Affordable Indian meals, enough protein, and consistent portions. The numbers below are estimates, not dietary rules set in stone.</p></div><div class="intro-badge food-badge"><span>◒</span><div><strong>Food first</strong><small>Supplements are optional</small></div></div></div>
+          <div class="nutrition-targets">
+            <article class="macro-card macro-calories"><div class="macro-label">DAILY ENERGY</div><div class="macro-number"><strong id="nutritionCalories">2,400</strong><span>kcal</span></div><div class="macro-desc">Starting estimate, review after 14 days.</div><div class="macro-visual calories-visual"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></article>
+            <article class="macro-card macro-protein"><div class="macro-label">PROTEIN</div><div class="macro-number"><strong id="nutritionProtein">115</strong><span>g</span></div><div class="macro-desc">Spread across meals where practical.</div><div class="macro-track"><span id="proteinMacroBar" style="width:100%"></span></div></article>
+            <article class="macro-card macro-carbs"><div class="macro-label">CARBOHYDRATES</div><div class="macro-number"><strong>335</strong><span>g</span></div><div class="macro-desc">Approximate guide at the starting target.</div><div class="macro-track"><span style="width:76%"></span></div></article>
+            <article class="macro-card macro-fat"><div class="macro-label">FATS</div><div class="macro-number"><strong>65</strong><span>g</span></div><div class="macro-desc">Include sensible portions of oils, nuts and seeds.</div><div class="macro-track"><span style="width:58%"></span></div></article>
+          </div>
+          <div class="section-heading meal-heading"><div><div class="eyebrow">A SAMPLE DAY</div><h2>Low-cost meal template</h2></div><span class="quiet-pill">Indian food · editable in real life</span></div>
+          <div class="meal-list" id="mealList"></div>
+          <div class="food-bottom-grid">
+            <article class="panel swap-panel"><div class="panel-heading"><div><div class="eyebrow">SMART SUBSTITUTIONS</div><h3>Spend where it counts</h3></div><span class="stat-icon protein-icon">₹</span></div><div class="swap-list"><div><span class="swap-symbol">↔</span><p><strong>Paneer or whey</strong><small>Swap with soy chunks, milk, curd, eggs or dal combinations when cheaper.</small></p></div><div><span class="swap-symbol">↔</span><p><strong>Almonds</strong><small>Peanuts can be a lower-cost option. Portions still matter because nuts are energy dense.</small></p></div><div><span class="swap-symbol">↔</span><p><strong>Chicken or fish</strong><small>Use eggs, soy chunks, chana and dairy to cover protein on vegetarian days.</small></p></div><div><span class="swap-symbol">↔</span><p><strong>Rice or roti</strong><small>Choose what is accessible and filling. Neither one automatically causes fat gain.</small></p></div></div></article>
+            <article class="panel supplement-panel"><div class="panel-heading"><div><div class="eyebrow">NO MARKETING NOISE</div><h3>Supplement reality</h3></div><span class="stat-icon session-icon">✓</span></div><div class="supplement-item"><span class="supplement-status optional">OPTIONAL</span><p><strong>Whey protein</strong><small>Convenient, not essential. Food can meet your target.</small></p></div><div class="supplement-item"><span class="supplement-status researched">EVIDENCE-BASED</span><p><strong>Creatine monohydrate</strong><small>Optional for healthy adults. Food, training and sleep come first.</small></p></div><div class="supplement-item"><span class="supplement-status skip">SKIP</span><p><strong>Testosterone boosters / fat burners</strong><small>Unnecessary and potentially risky, especially with your chest concern.</small></p></div></article>
+          </div>
+          <div class="notice-banner nutrition-note"><div class="notice-icon">i</div><div><strong>Targets are a starting point, not a verdict.</strong><p>Track your morning weight trend for 14 days. A stable trend with improving strength may be fine. Adjust calories in small steps only after reviewing your weight, waist, recovery, and actual food intake. If you have a medical condition affecting diet, get personalised clinical advice.</p></div></div>
+        </section>
+
+        <!-- PROGRESS -->
+        <section class="view" id="view-progress" aria-labelledby="pageTitle" hidden>
+          <div class="page-intro"><div><div class="eyebrow">MEASURE THE TREND</div><h2>Progress log</h2><p>Use consistent conditions and compare trends over weeks, not one random morning.</p></div><div class="intro-badge progress-badge"><span>⌁</span><div><strong id="measurementCount">0 entries</strong><small>Saved in this browser</small></div></div></div>
+          <div class="progress-layout">
+            <article class="panel measurement-panel"><div class="panel-heading"><div><div class="eyebrow">WEEKLY CHECK-IN</div><h3>Add a measurement</h3></div><span class="stat-icon weight-icon">↕</span></div>
+              <form id="measurementForm" class="form-stack">
+                <label>Date<input type="date" name="date" id="measurementDate" required></label>
+                <div class="form-two-col"><label>Morning weight (kg)<input type="number" name="weight" min="25" max="300" step="0.1" placeholder="68.5" required></label><label>Waist (cm)<input type="number" name="waist" min="30" max="250" step="0.1" placeholder="Optional"></label></div>
+                <label>Notes <span class="optional-label">optional</span><textarea name="notes" rows="3" maxlength="500" placeholder="Energy, recovery, measurements or anything worth remembering..."></textarea></label>
+                <button class="button button-dark button-full" type="submit">Save measurement <span aria-hidden="true">↗</span></button>
+              </form>
+            </article>
+            <article class="panel chart-panel"><div class="panel-heading"><div><div class="eyebrow">BODY-WEIGHT TREND</div><h3>Watch the line, not the noise</h3></div><span class="chart-unit">KG</span></div><div class="chart-summary"><div><strong id="chartLatestWeight">68.5</strong><span>Latest entry</span></div><div><strong id="chartWeightChange">—</strong><span>Change from first log</span></div></div><div class="chart-wrap"><svg id="weightChart" viewBox="0 0 640 240" role="img" aria-label="Body weight history chart"><text x="320" y="120" text-anchor="middle" class="chart-empty">Add a few measurements to see your trend.</text></svg></div><p class="chart-caption">Body weight naturally fluctuates with hydration, meals, and other factors. Use a weekly average whenever possible.</p></article>
+          </div>
+          <div class="panel history-panel"><div class="panel-heading"><div><div class="eyebrow">YOUR RECORD</div><h3>Measurement history</h3></div><button type="button" class="text-button" data-action="export-data">Export backup ↗</button></div><div class="table-wrap"><table><thead><tr><th>Date</th><th>Weight</th><th>Waist</th><th>Notes</th><th><span class="sr-only">Action</span></th></tr></thead><tbody id="measurementTable"><tr><td colspan="5" class="empty-cell">Your saved measurements will appear here.</td></tr></tbody></table></div></div>
+          <div class="progress-reminders"><div><span class="reminder-icon">◎</span><p><strong>Photos</strong><small>Take a front and side photo every two weeks with similar lighting and posture.</small></p></div><div><span class="reminder-icon">↗</span><p><strong>Strength</strong><small>Log the weight and reps you use. Better technique counts as progress too.</small></p></div><div><span class="reminder-icon">◷</span><p><strong>Recovery</strong><small>Record sleep and soreness; progress is not only what the mirror shows.</small></p></div></div>
+          <div class="panel history-panel session-history-panel"><div class="panel-heading"><div><div class="eyebrow">TRAINING RECORD</div><h3>Recent sessions</h3></div><button class="text-button" type="button" data-nav="workouts">Log a workout ↗</button></div><div id="sessionHistory" class="session-history-list"><p class="muted-text">Your completed workouts will appear here.</p></div></div>
+        </section>
+
+        <!-- HABITS -->
+        <section class="view" id="view-habits" aria-labelledby="pageTitle" hidden>
+          <div class="page-intro"><div><div class="eyebrow">THE DAILY SYSTEM</div><h2>Win the ordinary days</h2><p>Mark what you did, not what you hoped to do. Rest days count when rest is the plan.</p></div><div class="intro-badge habit-badge"><span>✓</span><div><strong id="habitDateDisplay">Today</strong><small id="habitSavedLabel">Not saved yet</small></div></div></div>
+          <div class="habit-page-grid">
+            <article class="panel daily-check-panel"><div class="panel-heading"><div><div class="eyebrow">DAILY CHECKLIST</div><h3>Basics before extras</h3></div><span class="check-count" id="fullHabitCount">0 / 6</span></div>
+              <form id="habitForm">
+                <div class="habit-checklist">
+                  <label class="big-habit-row"><input type="checkbox" name="train"><span class="custom-check"></span><span class="big-habit-icon">↗</span><span class="big-habit-copy"><strong>Follow today's training or recovery plan</strong><small>Do the scheduled workout, walk, or rest.</small></span></label>
+                  <label class="big-habit-row"><input type="checkbox" name="protein"><span class="custom-check"></span><span class="big-habit-icon">◌</span><span class="big-habit-copy"><strong>Eat protein-rich meals</strong><small>Get close to your target without obsessing over every gram.</small></span></label>
+                  <label class="big-habit-row"><input type="checkbox" name="water"><span class="custom-check"></span><span class="big-habit-icon">♧</span><span class="big-habit-copy"><strong>Drink water regularly</strong><small>Drink to thirst and increase fluids in heat or sweaty sessions.</small></span></label>
+                  <label class="big-habit-row"><input type="checkbox" name="sleep"><span class="custom-check"></span><span class="big-habit-icon">☾</span><span class="big-habit-copy"><strong>Protect sleep</strong><small>As an adult, aim for at least seven hours most nights.</small></span></label>
+                  <label class="big-habit-row"><input type="checkbox" name="log"><span class="custom-check"></span><span class="big-habit-icon">▤</span><span class="big-habit-copy"><strong>Record useful data</strong><small>Log the workout, food, body weight, or recovery notes that matter today.</small></span></label>
+                  <label class="big-habit-row"><input type="checkbox" name="learn"><span class="custom-check"></span><span class="big-habit-icon">✦</span><span class="big-habit-copy"><strong>Learn one thing</strong><small>Technique, nutrition, or recovery. Keep it small and accurate.</small></span></label>
+                </div>
+                <div class="form-divider"></div>
+                <div class="subsection-heading habit-data-heading"><h3>Quick daily details</h3><span class="muted-text">Optional, but useful</span></div>
+                <div class="form-three-col"><label>Protein (g)<input type="number" name="proteinGrams" min="0" max="400" placeholder="e.g. 110"></label><label>Water (litres)<input type="number" name="waterLitres" min="0" max="15" step="0.25" placeholder="e.g. 2.5"></label><label>Sleep (hours)<input type="number" name="sleepHours" min="0" max="24" step="0.25" placeholder="e.g. 7.5"></label></div>
+                <label class="notes-label">Daily note <textarea name="notes" rows="3" maxlength="500" placeholder="How did your energy, hunger, or soreness feel today?"></textarea></label>
+                <button class="button button-dark button-full" type="submit">Save today's check-in <span aria-hidden="true">↗</span></button>
+              </form>
+            </article>
+            <aside class="habit-side-column">
+              <article class="panel lesson-panel"><div class="eyebrow">TODAY'S FITNESS LESSON</div><div class="lesson-number">01<span>/ 06</span></div><h3>Progressive overload</h3><p>Muscles adapt when training gives them a manageable challenge that gradually increases over time. First improve control and repetitions, then add a small amount of weight.</p><div class="lesson-rule"><span>REMEMBER</span><strong>Better reps before heavier reps.</strong></div></article>
+              <article class="panel consistency-panel"><div class="panel-heading"><div><div class="eyebrow">KEEP SHOWING UP</div><h3>This week</h3></div><span class="stat-icon session-icon">↗</span></div><div class="week-dots" id="weekDots"></div><div class="week-summary"><strong id="weekWorkoutCount">0 sessions</strong><span>logged in the last 7 days</span></div><p>Consistency is a pattern across weeks, not a perfect single day.</p></article>
+            </aside>
+          </div>
+        </section>
+
+        <!-- SETTINGS -->
+        <section class="view" id="view-settings" aria-labelledby="pageTitle" hidden>
+          <div class="page-intro"><div><div class="eyebrow">MAKE IT YOURS</div><h2>Plan settings</h2><p>Adjust your starting information and targets. Calorie needs are estimates and should be reviewed against your real progress.</p></div><div class="intro-badge settings-badge"><span>⚙</span><div><strong>Personal setup</strong><small>Local to this browser</small></div></div></div>
+          <div class="settings-grid">
+            <article class="panel settings-panel"><div class="panel-heading"><div><div class="eyebrow">YOUR STARTING POINT</div><h3>Profile and targets</h3></div><span class="stat-icon weight-icon">✎</span></div>
+              <form id="settingsForm" class="form-stack">
+                <div class="form-two-col"><label>Age<input type="number" name="age" min="13" max="100" required></label><label>Height (cm)<input type="number" name="height" min="100" max="250" step="0.1" required></label></div>
+                <div class="form-two-col"><label>Starting weight (kg)<input type="number" name="startingWeight" min="25" max="300" step="0.1" required></label><label>Program start date<input type="date" name="startDate" required></label></div>
+                <div class="form-two-col"><label>Daily calorie target (kcal)<input type="number" name="calories" min="1000" max="6000" step="50" required></label><label>Daily protein target (g)<input type="number" name="protein" min="30" max="300" step="5" required></label></div>
+                <div class="settings-note"><strong>Current starting targets</strong><p><span id="settingsCalorieNote">2,400 kcal</span> and <span id="settingsProteinNote">115 g protein</span>. The calorie target is an estimate, not a medical prescription.</p></div>
+                <button class="button button-dark button-full" type="submit">Save settings <span aria-hidden="true">↗</span></button>
+              </form>
+            </article>
+            <article class="panel data-panel"><div class="panel-heading"><div><div class="eyebrow">YOUR DATA</div><h3>Backup and reset</h3></div><span class="stat-icon protein-icon">⌂</span></div><div class="data-action"><div class="data-action-icon">↓</div><div><strong>Export your data</strong><p>Download a JSON backup of your measurements, workout logs, daily habits, and settings.</p><button class="button button-outline-dark button-small" type="button" data-action="export-data">Export backup</button></div></div><div class="data-action"><div class="data-action-icon">↑</div><div><strong>Restore a backup</strong><p>Import a backup previously exported from this website. It replaces the data in this browser.</p><label class="button button-outline-dark button-small file-button">Choose backup file<input id="importFile" type="file" accept="application/json,.json" hidden></label></div></div><div class="data-action data-danger"><div class="data-action-icon">!</div><div><strong>Reset all local data</strong><p>This removes your saved settings, measurements, workout logs, and daily habits from this browser.</p><button class="button button-danger button-small" type="button" data-action="reset-data">Reset website data</button></div></div><div class="privacy-card"><span class="privacy-dot"></span><div><strong>No account, no cloud sync</strong><p>Your entries are stored in this browser using local storage. Clearing browser data can remove them, so export a backup regularly.</p></div></div></article>
+          </div>
+          <div class="safety-footer settings-safety"><strong>Health and safety.</strong> This website is an educational training tracker, not medical advice. If you have persistent chest enlargement, pain, a lump, nipple discharge, a medical condition, or exercise symptoms, seek qualified medical care.</div>
+        </section>
+      </main>
+      <footer class="site-footer"><span>90D FIT JOURNAL</span><span>Progress is a practice, not a punishment.</span><span id="footerDay">DAY 1 / 90</span></footer>
+    </div>
+  </div>
+
+  <!-- Workout logging dialog -->
+  <dialog class="workout-dialog" id="sessionDialog" aria-labelledby="sessionDialogTitle">
+    <div class="dialog-header"><div><div class="eyebrow">SESSION LOG</div><h2 id="sessionDialogTitle">Log workout</h2><p>Enter the load and reps from one representative working set for each exercise.</p></div><button class="dialog-close" type="button" data-action="close-dialog" aria-label="Close">×</button></div>
+    <form id="sessionForm">
+      <section class="dialog-rest-timer" aria-label="Rest timer">
+        <div><div class="eyebrow">BETWEEN SETS</div><output class="rest-timer-display" id="restTimerDisplay" role="timer" aria-label="Rest timer, 1 minute 30 seconds">01:30</output></div>
+        <div class="dialog-timer-controls">
+          <label class="timer-duration-label" for="restTimerDuration">Seconds<input id="restTimerDuration" type="number" min="15" max="600" step="15" value="90" inputmode="numeric"></label>
+          <button class="button button-dark button-small" id="restTimerStart" type="button" data-action="timer-start">Start</button><button class="button button-outline-dark button-small" id="restTimerPause" type="button" data-action="timer-pause" disabled>Pause</button><button class="button button-outline-dark button-small" id="restTimerReset" type="button" data-action="timer-reset">Reset</button>
+          <label class="timer-sound-setting"><input id="restTimerSound" type="checkbox" checked><span>Sound</span></label>
+        </div>
+        <p class="sr-only" id="restTimerStatus" aria-live="polite">Ready when you are.</p>
+      </section>
+      <input type="hidden" name="workoutId" id="sessionWorkoutId"><div class="session-exercise-list" id="sessionExerciseList"></div><label class="dialog-notes">Session notes <textarea name="notes" rows="3" maxlength="500" placeholder="Technique, energy, soreness, or adjustments"></textarea></label><div class="dialog-actions"><button class="button button-outline-dark" type="button" data-action="close-dialog">Cancel</button><button class="button button-dark" type="submit">Save session <span aria-hidden="true">↗</span></button></div>
+    </form>
+  </dialog>
+
+  <div class="toast" role="status" aria-live="polite" id="toast"></div>
+  <input type="file" id="hiddenImportFile" accept="application/json,.json" hidden>
+</body>
+</html>
